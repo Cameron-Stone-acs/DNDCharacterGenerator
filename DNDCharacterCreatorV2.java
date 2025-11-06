@@ -1,8 +1,3 @@
-/*
-Cameron Stone
-9/10/2025
-P4
-*/
 import java.io.FileOutputStream;
 import java.util.Scanner;
 import java.io.File;
@@ -11,10 +6,8 @@ import java.io.IOException;
 public class DNDCharacterCreatorV2
 {
     static Scanner scan = new Scanner(System.in);
-    //holds all the races and classes available to the player.
     static String[] races = {"Hill Dwarf", "Mountain Dwarf", "High Elf", "Wood Elf", "Drow Elf", "LightFoot Halfling", "Stout Halfling", "Human", "Dragonborn", "Forest Gnome", "Rock Gnome", "Half-Elf", "Half-Orc", "Tiefling"};
     static String[] classes = {"Artificer", "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "WarLock", "Wizard"};
-    //All the variables each character has.
     static String characterName;
     static String characterRace;
     static String characterClass;
@@ -25,7 +18,6 @@ public class DNDCharacterCreatorV2
     static int WIS;
     static int CHA;
     static int racePos;
-    //Variables used to confirm player input.
     static boolean createNewCharacter;
     static boolean writeToFile;
     static boolean reroll;
@@ -33,7 +25,6 @@ public class DNDCharacterCreatorV2
     static String options;
     public static void main(String[] args)
     {
-        //Main function that handles rerunning main parts of code.
         createNewCharacter = true;
         System.out.println("Welcome to DND Character Creator V2.");
         while (createNewCharacter)
@@ -57,7 +48,6 @@ public class DNDCharacterCreatorV2
     }
     static void getName()
     {
-        //Ask the user for their name and confirms your choice saving it to a variable.
         confirm = false;
         while(!confirm)
         {
@@ -74,7 +64,6 @@ public class DNDCharacterCreatorV2
     }
     static void getRace()
     {
-        //Ask the user for their race and confirms your choice saving it to a variable.
         confirm = false;
         while (!confirm)
         {
@@ -109,7 +98,6 @@ public class DNDCharacterCreatorV2
     }
     static void getClasss()
     {
-        //Ask the user for their class and confirms your choice saving it to a variable.
         confirm = false;
         while (!confirm)
         {
@@ -148,7 +136,6 @@ public class DNDCharacterCreatorV2
     }
     static void createStats()
     {
-        //Grid that holds all the stat modifiers for each race.
         int[][] statModifiers = {
                 {0,0,2,0,1,0}, //Hill Dwarf
                 {2,0,2,0,0,0}, //Mountain Dwarf
@@ -165,7 +152,6 @@ public class DNDCharacterCreatorV2
                 {2,0,1,0,0,0}, //Half Orc
                 {0,0,0,1,0,2}, //Tiefling
         };
-        //generates the stats with a random function from 3-18 + race stat modifieres.
         STR = random(3,18) + statModifiers[racePos][0];
         DEX = random(3,18) + statModifiers[racePos][1];
         CON = random(3,18) + statModifiers[racePos][2];
@@ -186,7 +172,6 @@ public class DNDCharacterCreatorV2
     }
     static void fileOptions()
     {
-        //Asks the user if they want to save delete or reroll their character then confirms their choice.
         confirm = false;
         while(!confirm)
         {
@@ -194,13 +179,11 @@ public class DNDCharacterCreatorV2
             options = scan.nextLine();
             switch (options.toLowerCase())
             {
-                //Starts the create file function.
                 case "save":
                     createFile();
                     confirm = true;
                     break;
                 case "delete":
-                    //Asks you if you want to create a new character or close the program.
                     System.out.println("Are you sure? y/n");
                     options = scan.nextLine();
                     if(options.equalsIgnoreCase("y"))
@@ -221,7 +204,6 @@ public class DNDCharacterCreatorV2
                     }
                     break;
                 case "reroll":
-                    //Reruns the createstats function then returns to this function.
                     System.out.println("Are you sure? y/n");
                     options = scan.nextLine();
                     if(options.equalsIgnoreCase("y"))
@@ -237,7 +219,6 @@ public class DNDCharacterCreatorV2
     }
     static void createFile()
     {
-        //attepts to create a file called CharacterStats unless the file already exists then asks the user if they want to overite the file or add to it then confirms their choice.
         boolean newFile = false;
         try
         {
@@ -322,8 +303,8 @@ public class DNDCharacterCreatorV2
     }
     static int random(int min, int max)
     {
-        //generates a random number between a minimum value and a maximum value.
         max = max - min + 1;
         return (int)(Math.random() * max + min);
     }
+
 }
